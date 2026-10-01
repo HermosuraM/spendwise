@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: process.env.VITE_BASE ?? '/',
   plugins: [react()],
-  // React + React Router + Recharts land in one ~220 kB (gzip) chunk; Supabase is already split out lazily.
+  // React + React Router + Recharts land in one ~230 kB (gzip) chunk; Supabase is already split out lazily.
   build: { chunkSizeWarningLimit: 900 },
   test: {
     environment: 'jsdom',
