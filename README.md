@@ -51,7 +51,7 @@ than 30.44 days later. A charge that misses two cycles is treated as cancelled.
 its category:
 
 ```math
-z = \frac{0.6745\,(\ln x - \operatorname{median})}{\operatorname{MAD}}
+z = \frac{0.6745 \cdot (\ln x - \text{median})}{\text{MAD}}
 ```
 
 Purchases from the last 90 days with z > 3.5 are flagged. The median and median absolute deviation are robust, so one
@@ -60,12 +60,17 @@ earlier splurge cannot hide the next one, and recurring merchants are excluded (
 **Month-end forecast.**
 
 ```math
-\text{projected} = \text{spent so far} + \text{recurring charges still expected} + \text{days left} \times \big(w \cdot \text{pace} + (1 - w) \cdot \text{baseline}\big)
+\text{projected} = \text{spent so far} + \text{recurring still due} + \text{days left} \times r
 ```
 
-Here *pace* is this month's everyday (non-recurring) spending per day, *baseline* is the median daily rate of the
-previous three months, and *w* is the share of the month that has passed. Early in the month the forecast leans on
-history, so a \$300 purchase on the 2nd isn't multiplied by 30; by month-end it follows the month itself.
+```math
+r = w \cdot \text{pace} + (1 - w) \cdot \text{baseline}
+```
+
+Here *r* is the daily rate for the rest of the month, *pace* is this month's everyday (non-recurring) spending per day,
+*baseline* is the median daily rate of the previous three months, and *w* is the share of the month that has passed.
+Early in the month the forecast leans on history, so a \$300 purchase on the 2nd isn't multiplied by 30; by month-end
+it follows the month itself.
 
 **Fair comparisons.** A month in progress is always compared with the same days of earlier months, never with whole months.
 
